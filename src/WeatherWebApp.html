@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather App</title>
+</head>
+<body>
+<h1>Weather App</h1>
+<p>Enter a location to get the current weather:</p>
+<input type="text" id="locationInput">
+<button onclick="getWeather()">Get Weather</button>
+<div id="weatherOutput"></div>
+
+<script>
+  function getWeather() {
+    var locationInput = document.getElementById("locationInput").value;
+    var apiEndpoint = "https://api.openweathermap.org/data/2.5/weather?q=" + locationInput + "&appid=YOUR_API_KEY_HERE";
+
+    fetch(apiEndpoint)
+            .then(response => response.json())
+            .then(data => {
+              var weatherOutput = document.getElementById("weatherOutput");
+              weatherOutput.innerHTML = "Current weather in " + data.name + ": " + data.weather[0].description;
+            })
+            .catch(error => console.error(error));
+  }
+</script>
+</body>
+</html>
